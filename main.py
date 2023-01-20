@@ -58,12 +58,15 @@ def main(opt):
 
                 iteration += 1
                 if iteration > opt['max_iterations']:
+                    print(f'[TRAIN] Final Loss: {total_train_loss / (iteration)}')
+                    print(f'[VAL] Final Loss: {val_loss} | Final Accuracy: {(100 * val_accuracy):.2f}')
                     break
 
     # Test
     experiment.load_checkpoint(f'{opt["output_path"]}/best_checkpoint.pth')
     test_accuracy, _ = experiment.validate(test_loader)
     logging.info(f'[TEST] Accuracy: {(100 * test_accuracy):.2f}')
+    print(f'[TEST] Accuracy: {(100 * test_accuracy):.2f}')
 
 if __name__ == '__main__':
 
